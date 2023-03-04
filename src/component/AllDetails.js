@@ -20,6 +20,8 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import map from "lodash/map";
+import range from "lodash/range";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -139,11 +141,24 @@ StyledTreeItem.propTypes = {
 };
 
 
-const AllDetailPage = () => {
+const DetailPage = () => {
+
+    const arra_value = [
+        { id: 1, color: "linear-gradient(to right, #D3D3D3, #1f1fffd1)" },
+        { id: 2, color: "linear-gradient(to right, #D3D3D3, #ff1f1fd1)" },
+        { id: 3, color: "linear-gradient(to right, #D3D3D3, #1fffb7d1)" },
+        { id: 4, color: "linear-gradient(to right, #D3D3D3, #00da15d1)" },
+        { id: 5, color: "linear-gradient(to right, #D3D3D3, #ebff00d1)" },
+        { id: 6, color: "linear-gradient(to right, #D3D3D3, #e06100)" },
+        { id: 7, color: "linear-gradient(to right, #D3D3D3, #d600e0)" },
+        { id: 8, color: "linear-gradient(to right, #D3D3D3, #545454)" },
+        { id: 9, color: "linear-gradient(to right, #D3D3D3, #ffffff)" },
+        { id: 10, color: "linear-gradient(to right, #D3D3D3, violet)" },
+    ]
+
     return (
         <div style={{
             width: "100%", height: "100%", display: 'flex', flexDirection: 'row',
-            //  backgroundColor: "rgb(85 171 248 / 79%)" 
             backgroundColor: "#fff"
         }} >
             <div style={{
@@ -165,183 +180,44 @@ const AllDetailPage = () => {
                     <StyledTreeItem nodeId="2" labelText="Patient" labelIcon={LocalHospital} />
                 </TreeView>
             </div>
-            <div style={{ width: '80%', height: "100%" }}>
+            <div style={{ width: '80%', height: "100%", borderRadius: '16px', margin: '3px', backgroundColor: 'lightgrey' }}>
                 <Typography sx={{ height: "30%", overflow: "auto", display: 'flex', flexDirection: "row", m: 1, justifyContent: 'space-evenly' }}>
-                    {/*<Grid container spacing={2}>
-                        {[
-                            lightTheme
-                            // ,darkTheme
-                        ].map((theme, index) => (
-                            <Grid item sx={{ width: '100%' }} key={index}>
-                                <ThemeProvider theme={theme}>
-                                    <Box
+                    <div style={{ width: "100%", height: "100%", overflow: "auto", display: "flex" }}>
+                        {
+                            // map(range(10), _ => 
+                            arra_value.map((data) => (
+                                <div key={data.id} style={{
+                                    width: "220px", margin: "6px", borderRadius: '20px',
+                                    height: '100%',
+                                }}>
+                                    <Card
                                         sx={{
-                                            p: 2,
-                                            bgcolor: 'background.default',
-                                            display: 'grid',
-                                            gridTemplateColumns: { md: '2fr 2fr 2fr 2fr 2fr' },
-                                            gap: 2,
-                                        }}
-                                    >
-                                        {[24, 24, 24, 24, 24].map((elevation) => (
-                                            <Card
-                                                key={elevation}
-                                                elevation={elevation}
-                                                sx={{
-                                                    maxWidth: 270,
-                                                    backgroundImage: "linear-gradient(to right, #D3D3D3, #0e6fffbf)"
-                                                }}>
-                                                <CardActionArea>
-                                                    <CardContent>
-                                                        <Typography sx={{ color: '#yyyy' }} gutterBottom variant="h5" component="div">
-                                                            Lizard
-                                                        </Typography>
-                                                        <Typography sx={{ color: '#fff' }} variant="body2" color="text.secondary">
-                                                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                                                            species, Antarctica
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                            </Card>
-                                        ))}
-                                    </Box>
-                                </ThemeProvider>
-                            </Grid>
-                        ))}
-                                            </Grid>*/}
-                    <Card sx={{
-                        maxWidth: 270,
-                        backgroundImage: "linear-gradient(to right, #D3D3D3, #0e6fffbf)"
-                    }}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Share
-                            </Button>
-                        </CardActions>
-                    </Card>
-                    <Card sx={{
-                        maxWidth: 270,
-                        backgroundImage: "linear-gradient(to right, #D3D3D3, green)"
-                    }}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Share
-                            </Button>
-                        </CardActions>
-                    </Card>
-                    <Card sx={{
-                        maxWidth: 270,
-                        backgroundImage: "linear-gradient(to right, #D3D3D3, rgb(0, 255, 255))"
-                    }}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Share
-                            </Button>
-                        </CardActions>
-                    </Card>
-                    <Card sx={{
-                        maxWidth: 270,
-                        backgroundImage: "linear-gradient(to right, #D3D3D3, yellow)"
-                    }}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Share
-                            </Button>
-                        </CardActions>
-                    </Card>
+                                            height: "100%", width: "220px", border: '1px solid white',
+                                            backgroundImage: data.color
+                                            // backgroundColor: data.color
+                                        }}>
+                                        <CardActionArea>
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    Lizard
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                                                    species, ranging across all continents except Antarctica
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                        <CardActions>
+                                            <Button size="small" color="primary">
+                                                Share
+                                            </Button>
+                                        </CardActions>
+                                    </Card>
+                                </div>
+                            ))}
+                    </div>
                 </Typography>
                 <Typography sx={{ height: "70%" }}>
-                    {/*<Grid container spacing={2}>
-                        {[
-                            lightTheme
-                            // ,darkTheme
-                        ].map((theme, index) => (
-                            <Grid item sx={{ width: '100%' }} key={index}>
-                                <ThemeProvider theme={theme}>
-                                    <Box
-                                        sx={{
-                                            p: 2,
-                                            bgcolor: 'background.default',
-                                            display: 'grid',
-                                            gridTemplateColumns: { md: '2fr 2fr 2fr 2fr 2fr' },
-                                            gap: 2,
-                                        }}
-                                    >
-                                        {[24, 24, 24, 24, 24].map((elevation) => (
-                                            <Card
-                                                key={elevation}
-                                                elevation={elevation}
-                                                sx={{
-                                                    maxWidth: 270,
-                                                    backgroundImage: "linear-gradient(to right, #D3D3D3, yellow)"
-                                                }}>
-                                                <CardActionArea>
-                                                    <CardContent>
-                                                        <Typography gutterBottom variant="h5" component="div">
-                                                            Lizard
-                                                        </Typography>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                                                            species, ranging across all continents except Antarctica
-                                                        </Typography>
-                                                    </CardContent>
-                                                </CardActionArea>
-                                                <CardActions>
-                                                    <Button size="small" color="primary">
-                                                        Share
-                                                    </Button>
-                                                </CardActions>
-                                            </Card>
-                                        ))}
-                                    </Box>
-                                </ThemeProvider>
-                            </Grid>
-                        ))}
-                                            </Grid>*/}
                     <TableContainer component={Paper} sx={{ m: 2, width: "97%" }} >
                         <Table sx={{ width: "100%" }} aria-label="customized table">
                             <TableHead>
@@ -374,4 +250,4 @@ const AllDetailPage = () => {
     )
 }
 
-export default AllDetailPage
+export default DetailPage
