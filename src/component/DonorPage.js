@@ -6,7 +6,7 @@ import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
 import Typography from '@mui/material/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import { LocalHospital, People } from '@material-ui/icons';
+import { LocalHospital, People, Dashboard } from '@material-ui/icons';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -184,6 +184,9 @@ const DonorPage = (setIsSubmitted) => {
                     defaultEndIcon={<div style={{ width: 24 }} />}
                     sx={{ mt: 10, pl: "-10px", flexGrow: 1, width: "90%", color: "#fff" }}
                 >
+                    <Link to={'/dashboard'} >
+                        <StyledTreeItem nodeId="2" labelText="DashBoard" labelIcon={Dashboard} />
+                    </Link>
                     <Link to={'/donorDetails'} style={{ direction: "none" }} >
                         <StyledTreeItem nodeId="1" labelText="Donor" labelIcon={People} />
                     </Link>
