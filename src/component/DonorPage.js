@@ -22,7 +22,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import map from "lodash/map";
 import range from "lodash/range";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -150,16 +150,15 @@ const DonorPage = (setIsSubmitted) => {
     const pageLogOut = () => { navigate("/") }
 
     const arra_value = [
-        { id: 1, color: "linear-gradient(to right, #D3D3D3, #1f1fffd1)" },
-        { id: 2, color: "linear-gradient(to right, #D3D3D3, #ff1f1fd1)" },
-        { id: 3, color: "linear-gradient(to right, #D3D3D3, #1fffb7d1)" },
-        { id: 4, color: "linear-gradient(to right, #D3D3D3, #00da15d1)" },
-        { id: 5, color: "linear-gradient(to right, #D3D3D3, #ebff00d1)" },
-        { id: 6, color: "linear-gradient(to right, #D3D3D3, #e06100)" },
-        { id: 7, color: "linear-gradient(to right, #D3D3D3, #d600e0)" },
-        { id: 8, color: "linear-gradient(to right, #D3D3D3, #545454)" },
-        { id: 9, color: "linear-gradient(to right, #D3D3D3, #ffffff)" },
-        { id: 10, color: "linear-gradient(to right, #D3D3D3, violet)" },
+        { id: 1, orgon: "liver", color: "linear-gradient(to right, #D3D3D3, #1f1fffd1)" },
+        { id: 2, orgon: "bladder", color: "linear-gradient(to right, #D3D3D3, #ff1f1fd1)" },
+        { id: 3, orgon: "kidneys", color: "linear-gradient(to right, #D3D3D3, #1fffb7d1)" },
+        { id: 4, orgon: "heart", color: "linear-gradient(to right, #D3D3D3, #00da15d1)" },
+        { id: 5, orgon: "Brain", color: "linear-gradient(to right, #D3D3D3, #ebff00d1)" },
+        { id: 6, orgon: "Lungs", color: "linear-gradient(to right, #D3D3D3, #e06100)" },
+        { id: 7, orgon: "Bone Marrow", color: "linear-gradient(to right, #D3D3D3, #d600e0)" },
+        { id: 8, orgon: "liver", color: "linear-gradient(to right, #D3D3D3, #545454)" },
+        { id: 9, orgon: "liver", color: "linear-gradient(to right, #D3D3D3, #ff1f1fd1)" },
     ]
 
     return (
@@ -185,8 +184,12 @@ const DonorPage = (setIsSubmitted) => {
                     defaultEndIcon={<div style={{ width: 24 }} />}
                     sx={{ mt: 10, pl: "-10px", flexGrow: 1, width: "90%", color: "#fff" }}
                 >
-                    <StyledTreeItem nodeId="1" labelText="Donor" labelIcon={People} />
-                    <StyledTreeItem nodeId="2" labelText="Patient" labelIcon={LocalHospital} />
+                    <Link to={'/donorDetails'} style={{ direction: "none" }} >
+                        <StyledTreeItem nodeId="1" labelText="Donor" labelIcon={People} />
+                    </Link>
+                    <Link to={'/patientDetails'} >
+                        <StyledTreeItem nodeId="2" labelText="Patient" labelIcon={LocalHospital} />
+                    </Link>
                 </TreeView>
                 <Typography>
                     <Button onClick={pageLogOut} variant='contained' sx={{ m: 3, backgroundColor: 'red', borderRadius: '10px' }}>
@@ -202,7 +205,7 @@ const DonorPage = (setIsSubmitted) => {
                             arra_value.map((data) => (
                                 <div key={data.id} style={{
                                     width: "220px", margin: "6px", borderRadius: '20px',
-                                    height: '100%',
+                                    height: '90%',
                                 }}>
                                     <Card
                                         sx={{
@@ -213,19 +216,19 @@ const DonorPage = (setIsSubmitted) => {
                                         <CardActionArea>
                                             <CardContent>
                                                 <Typography gutterBottom variant="h5" component="div">
-                                                    Lizard
+                                                    {data.orgon}
                                                 </Typography>
                                                 <Typography variant="body2" color="text.secondary">
-                                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                                    species, ranging across all continents except Antarctica
+                                                    Donate Date : 12-01-2012
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    Status : Good
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    DonorId : #DO1234
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
-                                        <CardActions>
-                                            <Button size="small" color="primary">
-                                                Share
-                                            </Button>
-                                        </CardActions>
                                     </Card>
                                 </div>
                             ))}
