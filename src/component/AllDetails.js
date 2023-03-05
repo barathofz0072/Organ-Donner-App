@@ -22,7 +22,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import map from "lodash/map";
 import range from "lodash/range";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ChooseFormType from './ChooseFormtype';
 
 
@@ -195,8 +195,12 @@ const DetailPage = () => {
                     defaultEndIcon={<div style={{ width: 24 }} />}
                     sx={{ mt: 10, pl: "-10px", flexGrow: 1, width: "90%", color: "#fff" }}
                 >
-                    <StyledTreeItem nodeId="1" labelText="Donor" labelIcon={People} />
-                    <StyledTreeItem nodeId="2" labelText="Patient" labelIcon={LocalHospital} />
+                    <Link to={'/donorDetails'} style={{ direction: "none" }} >
+                        <StyledTreeItem nodeId="1" labelText="Donor" labelIcon={People} />
+                    </Link>
+                    <Link to={'/patientDetails'} >
+                        <StyledTreeItem nodeId="2" labelText="Patient" labelIcon={LocalHospital} />
+                    </Link>
                 </TreeView>
                 <Typography>
                     <Button onClick={pageLogOut} variant='contained' sx={{ m: 3, backgroundColor: 'red', borderRadius: '10px' }}>
