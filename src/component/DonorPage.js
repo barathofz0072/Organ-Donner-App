@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TreeView from '@mui/lab/TreeView';
@@ -6,7 +6,7 @@ import TreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
 import Typography from '@mui/material/Typography';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import { AddCircle, LocalHospital, People } from '@material-ui/icons';
+import { LocalHospital, People } from '@material-ui/icons';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -23,7 +23,6 @@ import TableRow from '@mui/material/TableRow';
 import map from "lodash/map";
 import range from "lodash/range";
 import { useNavigate } from "react-router-dom";
-import ChooseFormType from './ChooseFormtype';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -144,17 +143,11 @@ StyledTreeItem.propTypes = {
 };
 
 
-const DetailPage = () => {
+const DonorPage = (setIsSubmitted) => {
 
     const navigate = useNavigate()
 
     const pageLogOut = () => { navigate("/") }
-
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const arra_value = [
         { id: 1, color: "linear-gradient(to right, #D3D3D3, #1f1fffd1)" },
@@ -168,9 +161,6 @@ const DetailPage = () => {
         { id: 9, color: "linear-gradient(to right, #D3D3D3, #ffffff)" },
         { id: 10, color: "linear-gradient(to right, #D3D3D3, violet)" },
     ]
-
-    const Matches_count = arra_value.length
-    const Request_count = arra_value.length
 
     return (
         <div style={{
@@ -204,87 +194,74 @@ const DetailPage = () => {
                     </Button>
                 </Typography>
             </div>
-            <div style={{ width: '80%', height: "99%", borderRadius: '16px', margin: '3px', backgroundColor: 'lightgrey', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div style={{ height: '9%', width: '100%' }}>
-                    <Button variant='contained' sx={{ float: 'right' }} onClick={handleClickOpen}>
-                        <AddCircle style={{ paddingRight: "12px" }} />
-                        Create Form
-                    </Button>
-                </div>
-                <Typography sx={{ height: "49%", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <Typography variant='h6' sx={{ padding: "9px 10px 4px 20px", height: "10%" }}>
-                        <Typography variant='h6' sx={{ float: 'left' }}>
-                            Matches ({Matches_count})
-                        </Typography>
-                    </Typography>
-                    <Typography sx={{ height: "90%", overflow: 'auto' }}>
-                        <TableContainer component={Paper} sx={{ m: 2, width: "97%" }} >
-                            <Table sx={{ width: "100%" }} aria-label="customized table">
-                                <TableHead>
-                                    <TableRow>
-                                        <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                                        <StyledTableCell align="right">Calories</StyledTableCell>
-                                        <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                                        <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                                        <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map((row) => (
-                                        <StyledTableRow key={row.name}>
-                                            <StyledTableCell component="th" scope="row">
-                                                {row.name}
-                                            </StyledTableCell>
-                                            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                                            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                                            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                                            <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                                        </StyledTableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Typography>
+            <div style={{ width: '80%', height: "100%", borderRadius: '16px', margin: '3px', backgroundColor: 'lightgrey' }}>
+                <Typography sx={{ height: "30%", overflow: "auto", display: 'flex', flexDirection: "row", m: 1, justifyContent: 'space-evenly' }}>
+                    <div style={{ width: "100%", height: "100%", overflow: "auto", display: "flex" }}>
+                        {
+                            // map(range(10), _ => 
+                            arra_value.map((data) => (
+                                <div key={data.id} style={{
+                                    width: "220px", margin: "6px", borderRadius: '20px',
+                                    height: '100%',
+                                }}>
+                                    <Card
+                                        sx={{
+                                            height: "100%", width: "220px", border: '1px solid white',
+                                            backgroundImage: data.color
+                                            // backgroundColor: data.color
+                                        }}>
+                                        <CardActionArea>
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    Lizard
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                                                    species, ranging across all continents except Antarctica
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                        <CardActions>
+                                            <Button size="small" color="primary">
+                                                Share
+                                            </Button>
+                                        </CardActions>
+                                    </Card>
+                                </div>
+                            ))}
+                    </div>
                 </Typography>
-                <Typography sx={{ height: "49%", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <Typography variant='h6' sx={{ padding: "9px 10px 4px 20px", height: "10%" }}>
-                        <Typography variant='h6' sx={{ float: 'left' }}>
-                            Requests ({Request_count})
-                        </Typography>
-                    </Typography>
-                    <Typography sx={{ height: "90%", overflow: 'auto' }}>
-                        <TableContainer component={Paper} sx={{ m: 2, width: "97%" }} >
-                            <Table sx={{ width: "100%" }} aria-label="customized table">
-                                <TableHead>
-                                    <TableRow>
-                                        <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                                        <StyledTableCell align="right">Calories</StyledTableCell>
-                                        <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                                        <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                                        <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map((row) => (
-                                        <StyledTableRow key={row.name}>
-                                            <StyledTableCell component="th" scope="row">
-                                                {row.name}
-                                            </StyledTableCell>
-                                            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                                            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                                            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                                            <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                                        </StyledTableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Typography>
+                <Typography sx={{ height: "70%" }}>
+                    <TableContainer component={Paper} sx={{ m: 2, width: "97%" }} >
+                        <Table sx={{ width: "100%" }} aria-label="customized table">
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+                                    <StyledTableCell align="right">Calories</StyledTableCell>
+                                    <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
+                                    <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
+                                    <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <StyledTableRow key={row.name}>
+                                        <StyledTableCell component="th" scope="row">
+                                            {row.name}
+                                        </StyledTableCell>
+                                        <StyledTableCell align="right">{row.calories}</StyledTableCell>
+                                        <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                                        <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                                        <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                                    </StyledTableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </Typography>
             </div>
-            <ChooseFormType open={open} setOpen={setOpen} />
         </div >
     )
 }
 
-export default DetailPage
+export default DonorPage
