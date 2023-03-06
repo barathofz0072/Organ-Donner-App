@@ -22,7 +22,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import map from "lodash/map";
 import range from "lodash/range";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -146,6 +146,8 @@ StyledTreeItem.propTypes = {
 const DonorPage = (setIsSubmitted) => {
 
     const navigate = useNavigate()
+    const location = useLocation();
+    const PathName = location.pathname;
 
     const pageLogOut = () => { navigate("/") }
 
@@ -183,15 +185,24 @@ const DonorPage = (setIsSubmitted) => {
                     defaultExpandIcon={<ArrowRightIcon />}
                     defaultEndIcon={<div style={{ width: 24 }} />}
                     sx={{ mt: 10, pl: "-10px", flexGrow: 1, width: "90%", color: "#fff" }}
+                    selected={
+                        "/dashboard" === PathName
+                            ? ["1"]
+                            : "/donorDetails" === PathName
+                                ? ["2"]
+                                : "/patientDetails" === PathName
+                                    ? ["3"]
+                                    : ["1"]
+                    }
                 >
-                    <Link to={'/dashboard'} >
-                        <StyledTreeItem nodeId="2" labelText="DashBoard" labelIcon={Dashboard} />
+                    <Link style={{ textDecoration: 'none' }} to={'/dashboard'} >
+                        <StyledTreeItem nodeId="1" labelText="DashBoard" labelIcon={Dashboard} />
                     </Link>
-                    <Link to={'/donorDetails'} style={{ direction: "none" }} >
-                        <StyledTreeItem nodeId="1" labelText="Donor" labelIcon={People} />
+                    <Link style={{ textDecoration: 'none' }} to={'/donorDetails'} >
+                        <StyledTreeItem nodeId="2" labelText="Donor" labelIcon={People} />
                     </Link>
-                    <Link to={'/patientDetails'} >
-                        <StyledTreeItem nodeId="2" labelText="Patient" labelIcon={LocalHospital} />
+                    <Link style={{ textDecoration: 'none' }} to={'/patientDetails'} >
+                        <StyledTreeItem nodeId="3" labelText="Patient" labelIcon={LocalHospital} />
                     </Link>
                 </TreeView>
                 <Typography>
